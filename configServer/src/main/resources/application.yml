@@ -8,9 +8,7 @@ spring:
     config:
       server:
         git:
-          url: https://github.com/PabloAlarcon1/esp-back-i-parcial
-          default-level: develop
+          uri: https://github.com/PabloAlarcon1/esp-back-i-parcial
+          default-label: develop
           force-pull: true
           search-paths: config-data
-
-
