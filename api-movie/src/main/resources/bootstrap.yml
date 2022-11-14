@@ -1,6 +1,6 @@
 spring:
   application:
-    name: gateway
+    name: api-movie
   cloud:
     config:
       enabled: true
