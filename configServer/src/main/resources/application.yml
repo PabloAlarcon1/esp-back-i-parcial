@@ -1,0 +1,16 @@
+server:
+  port: ${PORT:8888}
+
+spring:
+  application:
+    name: config-server
+  cloud:
+    config:
+      server:
+        git:
+          url: https://github.com/PabloAlarcon1/esp-back-i-parcial
+          default-level: develop
+          force-pull: true
+          search-paths: config-data
+
+
