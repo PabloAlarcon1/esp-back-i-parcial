@@ -6,9 +6,9 @@ spring:
 
   datasource:
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/esp-back-i-parcial-dev
-    username: usr-esp-back-i-parcial
-    password: pwd-esp-back-i-parcial
+    url: jdbc:mysql://localhost:3306/catalog-dev
+    username: usr-esp-catalog
+    password: pwd-esp-catalog
   jpa:
     hibernate.ddl-auto: update
     generate-ddl: true
