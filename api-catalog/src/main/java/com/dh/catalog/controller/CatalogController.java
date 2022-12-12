@@ -1,9 +1,11 @@
 package com.dh.catalog.controller;
 
-import com.dh.catalog.client.MovieServiceClient;
-import com.dh.catalog.client.SerieServiceClient;
+import com.dh.catalog.client.MovieRepositoryFeign;
+import com.dh.catalog.client.ServiceRepositoryFeign;
 import com.dh.catalog.model.Genre;
+import com.dh.catalog.model.dto.GenreDTO;
 import com.dh.catalog.model.dto.MovieDTO;
+import com.dh.catalog.service.CatalogService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,26 +18,25 @@ import java.util.List;
 @RequestMapping("/api/v1/catalog")
 public class CatalogController {
 
-	private final MovieServiceClient movieServiceClient;
-	private final SerieServiceClient serieServiceClient;
+	private final CatalogService catalogService;
 
-	public CatalogController(MovieServiceClient movieServiceClient, SerieServiceClient serieServiceClient) {
-		this.movieServiceClient = movieServiceClient;
-		this.serieServiceClient = serieServiceClient;
-	}
-
-	@GetMapping("/movies/{genre}")
-	ResponseEntity<List<MovieDTO>> getGenre(@PathVariable String genre) {
-
-		return ResponseEntity.ok(movieServiceClient.findByGenre(genre));
+	public CatalogController(CatalogService catalogService) {
+		this.catalogService = catalogService;
 	}
 
 	@GetMapping("/online/{genre}")
-	ResponseEntity<Genre> getAllByGenre(@PathVariable String genre) {
-		Genre response = new Genre();
-		response.setMovies(movieServiceClient.findByGenre(genre));
-		response.setSeries(serieServiceClient.findByGenre(genre));
+	ResponseEntity<GenreDTO> getAllByGenreOnline(@PathVariable String genre) {
+		return ResponseEntity.ok().body(catalogService.findMoviesAndSeriesByGenreOnline(genre));
+	}
+
+	@GetMapping("/offline/{genre}")
+	ResponseEntity<GenreDTO> getAllByGenreOffline(@PathVariable String genre) {
+		GenreDTO response = new GenreDTO();
 		response.setGenre(genre);
+
+		response.SaveToMoviesDTO(catalogService.findMoviesByGenre(genre));
+		response.SaveToSeriesDTO(catalogService.findSeriesByGenre(genre));
+
 		return ResponseEntity.ok().body(response);
 	}
 

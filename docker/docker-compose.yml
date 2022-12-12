@@ -1,12 +1,12 @@
 version: '3.3'
 services:
-  mysql:
+  mysql-container:
     image: mysql:5.7
     restart: always
     environment:
-      MYSQL_DATABASE: 'movie-dev'
-      MYSQL_USER: 'usr-movie'
-      MYSQL_PASSWORD: 'pwd-movie'
+      MYSQL_DATABASE: 'movie-dev-mysql'
+      MYSQL_USER: 'usr-movie-mysql'
+      MYSQL_PASSWORD: 'pwd-movie-mysql'
       MYSQL_ROOT_PASSWORD: 'password'
     ports:
       # <Port exposed> : < MySQL Port running inside container>
