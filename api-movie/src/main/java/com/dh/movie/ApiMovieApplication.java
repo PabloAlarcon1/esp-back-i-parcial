@@ -19,16 +19,16 @@ public class ApiMovieApplication {
 
 
     @Bean
-    public CommandLineRunner loadData(MovieRepository repository) {
+    public CommandLineRunner loadData(MovieRepository movieRepository) {
         return (args) -> {
-            if (!repository.findAll().isEmpty()) {
+            if (!movieRepository.findAll().isEmpty()) {
                 return;
             }
 
-            repository.save(new Movie(null, "Pelicula 1", "Terror", "www.netflix.com"));
-            repository.save(new Movie(null, "Pelicula 2", "Terror", "www.netflix.com"));
-            repository.save(new Movie(null, "Pelicula 3", "Comedia", "www.netflix.com"));
-            repository.save(new Movie(null, "Pelicula 4", "Ficcion", "www.netflix.com"));
+            movieRepository.save(new Movie(null, "Pelicula 1", "Terror", "www.netflix.com"));
+            movieRepository.save(new Movie(null, "Pelicula 2", "Terror", "www.netflix.com"));
+            movieRepository.save(new Movie(null, "Pelicula 3", "Comedia", "www.netflix.com"));
+            movieRepository.save(new Movie(null, "Pelicula 4", "Ficcion", "www.netflix.com"));
         };
     }
 

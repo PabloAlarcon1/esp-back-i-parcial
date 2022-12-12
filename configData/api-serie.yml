@@ -9,15 +9,15 @@ spring:
   zipkin:
     baseUrl: http://localhost:9411/
   application:
-    name: api-catalog
+    name: api-series
   data:
     mongodb:
-      database: catalog-dev-mongo
+      database: series-dev-mongo
       port: 27017
-      host: localhost
+      host: localhost    
 eureka:
-   client:
-      registerWithEureka: true
-      fetchRegistry: true
-      serviceURL:
-         defaultZone: http://localhost:8761/eureka  
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceURL:
+      defaultZone: http://localhost:8761/eureka
