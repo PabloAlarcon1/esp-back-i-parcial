@@ -26,7 +26,6 @@ public class SeasonService implements SerieService{
         seriesEventProducer.execute(serie);
         return serieRepository.save(serie);
     }
-
     @Override
     public List<Serie> getAll() {
         return serieRepository.findAll();

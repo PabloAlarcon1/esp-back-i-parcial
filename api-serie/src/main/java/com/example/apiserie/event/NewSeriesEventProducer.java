@@ -34,19 +34,16 @@ public class NewSeriesEventProducer {
     public void execute(Serie serie) {
         SerieDTO serieDTO = new SerieDTO();
         BeanUtils.copyProperties(serie, serieDTO);
-        for (Season s :
-                serie.getSeasons()) {
+        serie.getSeasons().forEach(s -> {
             SeasonDTO sDTO = new SeasonDTO();
             BeanUtils.copyProperties(s, sDTO);
-            for (Chapter c :
-                    s.getChapters()) {
+            for (Chapter c : s.getChapters()) {
                 ChapterDTO cDTO = new ChapterDTO();
                 BeanUtils.copyProperties(c, cDTO);
                 sDTO.getChapters().add(cDTO);
             }
-
             serieDTO.getSeasons().add(sDTO);
-    }
+        });
         if (serieDTO.getSeasons().get(0).getChapters().get(0) != null && serie.getSeasons().get(0).getChapters().get(0) != null) {
             rabbitTemplate.convertAndSend(RabbitMQConfig.EXCHANGE_NAME, RabbitMQConfig.TOPIC_NEW_SERIES, serieDTO);
         }
